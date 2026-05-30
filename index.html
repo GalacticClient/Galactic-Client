@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Galactic Client Launcher</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0a0f24, #1a2340);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .launcher-box {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 30px;
+        border-radius: 15px;
+        width: 350px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        backdrop-filter: blur(10px);
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        font-size: 26px;
+        letter-spacing: 1px;
+    }
+
+    select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        background: #4a7cff;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #6a95ff;
+    }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+</style>
+</head>
+<body>
+
+<div class="launcher-box">
+    <h1>Galactic Client</h1>
+    <p>Select a version to launch:</p>
+
+    <select id="versionSelect">
+        <option value="Galactic-Client-6.2.0.html">6.2.0 (Latest)</option>
+        <option value="Galactic-Client-6.0.0.html">6.0.0</option>
+        <option value="Galactic-Client-5.0.0.html">5.0.0</option>
+        <option value="Galactic-Client-4.0.0.html">4.0.0</option>
+        <option value="Galactic-Client-3.0.0.html">3.0.0</option>
+        <option value="Galactic-Client-2.0.0.html">2.0.0</option>
+        <option value="Galactic-Client-1.0.0.html">1.0.0</option>
+    </select>
+
+    <button onclick="launch()">Launch</button>
+
+    <div class="footer">Made by Mohammad</div>
+</div>
+
+<script>
+function launch() {
+    const version = document.getElementById("versionSelect").value;
+    window.location.href = version;
+}
+</script>
+
+</body>
+</html>
