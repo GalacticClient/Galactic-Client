@@ -33,19 +33,7 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
 .news-card-body{padding:12px 14px 14px;}
 .news-card-title{font-size:14px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px;}
 .news-card-meta{display:flex;justify-content:space-between;font-size:12px;color:#666;}
-.settings-page{padding:32px 40px;max-width:1400px;}
-.settings-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;}
-.settings-title{font-family:'Exo 2',sans-serif;font-size:32px;font-weight:900;letter-spacing:2px;}
-.save-btn{background:#4caf50;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:15px;font-weight:700;cursor:pointer;}
-.settings-group-label{color:#666;font-size:14px;font-weight:600;margin-bottom:16px;margin-top:8px;}
-.settings-row{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 0;border-bottom:1px solid #1e1e1e;}
-.settings-row-label{font-size:16px;font-weight:700;margin-bottom:4px;}
-.settings-row-desc{font-size:13px;color:#666;max-width:580px;}
-.settings-row-control{flex-shrink:0;margin-left:20px;}
-.ctrl-select{background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:6px;padding:8px 14px;font-size:14px;font-family:'Nunito',sans-serif;min-width:100px;}
-.ctrl-input{background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:6px;padding:8px 14px;font-size:14px;font-family:'Nunito',sans-serif;min-width:220px;}
-.ctrl-btn-cyan{background:#29b6d4;color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:14px;font-weight:700;cursor:pointer;}
-.ctrl-btn-dark{background:#2a2a2a;color:#fff;border:1px solid #333;border-radius:6px;padding:9px 22px;font-size:14px;cursor:pointer;}
+
 .downloads-page{padding:40px;}
 .downloads-title{font-family:'Exo 2',sans-serif;font-size:26px;font-weight:900;letter-spacing:3px;text-align:center;margin-bottom:32px;}
 .downloads-list{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;}
@@ -61,7 +49,7 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
 <body>
 
 <nav>
-  <div class="nav-logo">
+  <div class="nav-logo" onclick="showPage('home', document.querySelector('.nav-link'))" style="cursor:pointer;">
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
       <polygon points="18,2 34,11 34,25 18,34 2,25 2,11" fill="#1a2a3a" stroke="#29b6d4" stroke-width="2"/>
       <path d="M10 22 L14 14 L18 20 L22 12 L26 22" stroke="white" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
@@ -70,7 +58,6 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
   </div>
   <div class="nav-links">
     <button class="nav-link active" onclick="showPage('home',this)">Home</button>
-    <button class="nav-link" onclick="showPage('settings',this)">Settings</button>
     <button class="nav-link" onclick="showPage('downloads',this)">Downloads</button>
   </div>
   <button class="nav-close">✕</button>
@@ -82,7 +69,7 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-launch-btn" id="launchBtn" onclick="launchClient()">
       <div class="launch-title" id="launchText">LAUNCH GALACTIC</div>
-      <div class="launch-sub" id="launchSub">EaglercraftX 1.8.9</div>
+      <div class="launch-sub" id="launchSub">EaglercraftX 1.1.2</div>
     </div>
   </div>
   <div class="news-section">
@@ -91,42 +78,6 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
   </div>
 </div>
 
-<!-- SETTINGS -->
-<div class="page" id="page-settings">
-  <div class="settings-page">
-    <div class="settings-header">
-      <div class="settings-title">PREFERENCES</div>
-      <button class="save-btn">Save<br>Changes</button>
-    </div>
-    <div class="settings-group-label">Game Settings</div>
-    <div class="settings-row">
-      <div>
-        <div class="settings-row-label">Client</div>
-        <div class="settings-row-desc">Select the client you want to use for the game. WASM versions have better performance</div>
-      </div>
-      <div class="settings-row-control">
-        <select class="ctrl-select"><option>1.8.9</option><option>1.8.8</option><option>1.12.2</option></select>
-      </div>
-    </div>
-    <div class="settings-group-label" style="margin-top:24px;">Web Settings</div>
-    <div class="settings-row">
-      <div><div class="settings-row-label">Tab name</div><div class="settings-row-desc">Set the title of this tab</div></div>
-      <div class="settings-row-control"><input class="ctrl-input" type="text" value="Galactic Launcher"></div>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-row-label">Tab icon</div><div class="settings-row-desc">Input a url to an image for the tab icon</div></div>
-      <div class="settings-row-control"><input class="ctrl-input" type="text" value="/assets/icon.webp"></div>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-row-label">about:blank</div><div class="settings-row-desc">Open this tab in a blank tab</div></div>
-      <div class="settings-row-control"><button class="ctrl-btn-cyan">Open</button></div>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-row-label">Auto about:blank</div><div class="settings-row-desc">Instantly opens about:blank if you don't want to leave this page in your history. Doesn't work in firefox</div></div>
-      <div class="settings-row-control"><button class="ctrl-btn-dark">Disabled</button></div>
-    </div>
-  </div>
-</div>
 
 <!-- DOWNLOADS -->
 <div class="page" id="page-downloads">
@@ -150,11 +101,11 @@ nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;b
 // Set CLIENT_FILE to the path of your client HTML file, relative to this launcher.
 // Example: if your client is in a folder called "client" next to this file, use "client/index.html"
 // Example: if it's in the same folder, use "eaglercraft.html"
-const CLIENT_FILE = "Galactic-Client-6.2.0.html";
+const CLIENT_FILE = "client/index.html";
 
 // Button display text
 const LAUNCH_TITLE = "LAUNCH GALACTIC";
-const LAUNCH_VERSION = "EaglercraftX 1.1,2";
+const LAUNCH_VERSION = "EaglercraftX 1.8.9";
 
 // --- NEWS CARDS ---
 // Add, remove, or edit news items here.
@@ -162,19 +113,19 @@ const LAUNCH_VERSION = "EaglercraftX 1.1,2";
 // color options: "green" | "sunset" | "night"  (controls the thumbnail art)
 const NEWS_ITEMS = [
   {
-    title: "more cheats blah blah blah",
+    title: "Galactic Season 1 released! This new season introduces many new features including custom cosmetics and more!",
     date: "2025-01-01",
     author: "Galactic",
     color: "green"
   },
   {
-    title: "cheats blah blah",
+    title: "Galactic Launcher v1.0.0 released for EaglercraftX! Now available for all browsers.",
     date: "2025-01-01",
     author: "Galactic",
     color: "sunset"
   },
   {
-    title: "News ",
+    title: "EaglercraftX 1.8.9 update released. Performance improvements and bug fixes included.",
     date: "2025-01-01",
     author: "Galactic",
     color: "night"
@@ -188,13 +139,39 @@ const NEWS_ITEMS = [
 // Example GitHub repo page:    "https://github.com/YOUR_USERNAME/YOUR_REPO"
 const DOWNLOAD_ITEMS = [
   {
-    name: "Galactic 1.1.2",
-    desc: "Latest Version of The Download ",
-    url: "https://github.com/GalacticClient/Galactic-Client"
+    name: "Galactic 1.8.9",
+    desc: "Standard EaglercraftX client",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/galactic-1.8.9.zip"
   },
-
   {
-
+    name: "Galactic 1.8.9 WASM",
+    desc: "Better performance — recommended",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/galactic-1.8.9-wasm.zip"
+  },
+  {
+    name: "Resent 1.8.9",
+    desc: "PvP-focused client",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/resent-1.8.9.zip"
+  },
+  {
+    name: "Starlike 1.8.9",
+    desc: "Cosmetics & utility client",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/starlike-1.8.9.zip"
+  },
+  {
+    name: "EaglerForge 1.8.9",
+    desc: "Modded EaglercraftX client",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/eaglerforge-1.8.9.zip"
+  },
+  {
+    name: "TuffClient 1.12.2",
+    desc: "1.12.2 edition client",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/tuffclient-1.12.2.zip"
+  },
+  {
+    name: "TuffClient WASM 1.12.2",
+    desc: "1.12.2 WASM — better performance",
+    url: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/tuffclient-wasm-1.12.2.zip"
   }
 ];
 
@@ -338,12 +315,20 @@ function drawNewsCard(id, theme) {
   }
 }
 
-window.addEventListener('load', () => {
-  drawHero();
+function init() {
   buildNews();
   buildDownloads();
-  window.addEventListener('resize', drawHero);
-});
+  requestAnimationFrame(() => {
+    drawHero();
+    window.addEventListener('resize', drawHero);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 </body>
 </html>
