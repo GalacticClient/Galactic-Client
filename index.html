@@ -2,95 +2,348 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Galactic Client Launcher</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galactic Launcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #0a0f24, #1a2340);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .launcher-box {
-        background: rgba(255, 255, 255, 0.08);
-        padding: 30px;
-        border-radius: 15px;
-        width: 350px;
-        text-align: center;
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        backdrop-filter: blur(10px);
-    }
-
-    h1 {
-        margin-bottom: 10px;
-        font-size: 26px;
-        letter-spacing: 1px;
-    }
-
-    select {
-        width: 100%;
-        padding: 12px;
-        border-radius: 8px;
-        border: none;
-        margin-top: 15px;
-        font-size: 16px;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 20px;
-        background: #4a7cff;
-        border: none;
-        border-radius: 8px;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        background: #6a95ff;
-    }
-
-    .footer {
-        margin-top: 20px;
-        font-size: 12px;
-        opacity: 0.7;
-    }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#111;font-family:'Nunito',sans-serif;color:#fff;min-height:100vh;}
+nav{display:flex;align-items:center;padding:0 24px;height:60px;background:#111;border-bottom:1px solid #222;}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:auto;}
+.nav-logo-text{font-size:22px;font-weight:800;background:linear-gradient(90deg,#4dd0ff,#e040fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:4px;}
+.nav-link{padding:8px 20px;border-radius:8px;font-size:15px;font-weight:600;color:#ccc;cursor:pointer;border:none;background:transparent;transition:all .15s;}
+.nav-link:hover{color:#fff;}
+.nav-link.active{background:#222;color:#fff;}
+.nav-close{width:36px;height:36px;border-radius:8px;background:#222;border:none;color:#aaa;font-size:18px;cursor:pointer;margin-left:16px;display:flex;align-items:center;justify-content:center;}
+.page{display:none;}
+.page.active{display:block;}
+.hero{width:100%;height:360px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
+.hero-launch-btn{position:relative;z-index:2;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.55);backdrop-filter:blur(10px);border-radius:12px;padding:18px 52px;text-align:center;cursor:pointer;transition:all .2s;}
+.hero-launch-btn:hover{background:rgba(255,255,255,0.3);}
+.hero-launch-btn .launch-title{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:900;letter-spacing:3px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.4);}
+.hero-launch-btn .launch-sub{font-size:14px;color:rgba(255,255,255,.9);margin-top:3px;font-weight:600;}
+.news-section{background:#111;padding:40px 40px 60px;}
+.news-title{font-family:'Exo 2',sans-serif;font-size:24px;font-weight:900;letter-spacing:3px;text-align:center;margin-bottom:28px;}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.news-card{background:#1a1a1a;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .15s;}
+.news-card:hover{transform:translateY(-2px);}
+.news-card-thumb{width:100%;height:180px;display:block;object-fit:cover;}
+.news-card-body{padding:12px 14px 14px;}
+.news-card-title{font-size:14px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px;}
+.news-card-meta{display:flex;justify-content:space-between;font-size:12px;color:#666;}
+.settings-page{padding:32px 40px;max-width:1400px;}
+.settings-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;}
+.settings-title{font-family:'Exo 2',sans-serif;font-size:32px;font-weight:900;letter-spacing:2px;}
+.save-btn{background:#4caf50;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:15px;font-weight:700;cursor:pointer;}
+.settings-group-label{color:#666;font-size:14px;font-weight:600;margin-bottom:16px;margin-top:8px;}
+.settings-row{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 0;border-bottom:1px solid #1e1e1e;}
+.settings-row-label{font-size:16px;font-weight:700;margin-bottom:4px;}
+.settings-row-desc{font-size:13px;color:#666;max-width:580px;}
+.settings-row-control{flex-shrink:0;margin-left:20px;}
+.ctrl-select{background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:6px;padding:8px 14px;font-size:14px;font-family:'Nunito',sans-serif;min-width:100px;}
+.ctrl-input{background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:6px;padding:8px 14px;font-size:14px;font-family:'Nunito',sans-serif;min-width:220px;}
+.ctrl-btn-cyan{background:#29b6d4;color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:14px;font-weight:700;cursor:pointer;}
+.ctrl-btn-dark{background:#2a2a2a;color:#fff;border:1px solid #333;border-radius:6px;padding:9px 22px;font-size:14px;cursor:pointer;}
+.downloads-page{padding:40px;}
+.downloads-title{font-family:'Exo 2',sans-serif;font-size:26px;font-weight:900;letter-spacing:3px;text-align:center;margin-bottom:32px;}
+.downloads-list{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;}
+.dl-row{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:#1c1c1c;border-bottom:1px solid #252525;}
+.dl-row:first-child{border-radius:8px 8px 0 0;}
+.dl-row:last-child{border-radius:0 0 8px 8px;border-bottom:none;}
+.dl-name{font-size:16px;font-weight:700;}
+.dl-desc{font-size:12px;color:#666;margin-top:2px;}
+.dl-btn{background:#29b6d4;color:#fff;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;}
+.dl-btn:hover{background:#00acc1;}
 </style>
 </head>
 <body>
 
-<div class="launcher-box">
-    <h1>Galactic Client</h1>
-    <p>Select a version to launch:</p>
+<nav>
+  <div class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <polygon points="18,2 34,11 34,25 18,34 2,25 2,11" fill="#1a2a3a" stroke="#29b6d4" stroke-width="2"/>
+      <path d="M10 22 L14 14 L18 20 L22 12 L26 22" stroke="white" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">Galactic</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home',this)">Home</button>
+    <button class="nav-link" onclick="showPage('settings',this)">Settings</button>
+    <button class="nav-link" onclick="showPage('downloads',this)">Downloads</button>
+  </div>
+  <button class="nav-close">✕</button>
+</nav>
 
-    <select id="versionSelect">
-        <option value="Galactic-Client-6.2.0.html">6.2.0 (Latest)</option>
-        <option value="Galactic-Client-6.0.0.html">6.0.0</option>
-        <option value="Galactic-Client-5.0.0.html">5.0.0</option>
-        <option value="Galactic-Client-4.0.0.html">4.0.0</option>
-        <option value="Galactic-Client-3.0.0.html">3.0.0</option>
-        <option value="Galactic-Client-2.0.0.html">2.0.0</option>
-        <option value="Galactic-Client-1.0.0.html">1.0.0</option>
-    </select>
-
-    <button onclick="launch()">Launch</button>
-
-    <div class="footer">Made by Musawer</div>
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-launch-btn" id="launchBtn" onclick="launchClient()">
+      <div class="launch-title" id="launchText">LAUNCH GALACTIC</div>
+      <div class="launch-sub" id="launchSub">EaglercraftX 1.8.9</div>
+    </div>
+  </div>
+  <div class="news-section">
+    <div class="news-title">GALACTIC NEWS</div>
+    <div class="news-grid" id="newsGrid"></div>
+  </div>
 </div>
 
-<script>
-function launch() {
-    const version = document.getElementById("versionSelect").value;
-    window.location.href = version;
-}
-</script>
+<!-- SETTINGS -->
+<div class="page" id="page-settings">
+  <div class="settings-page">
+    <div class="settings-header">
+      <div class="settings-title">PREFERENCES</div>
+      <button class="save-btn">Save<br>Changes</button>
+    </div>
+    <div class="settings-group-label">Game Settings</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-row-label">Client</div>
+        <div class="settings-row-desc">Select the client you want to use for the game. WASM versions have better performance</div>
+      </div>
+      <div class="settings-row-control">
+        <select class="ctrl-select"><option>1.8.9</option><option>1.8.8</option><option>1.12.2</option></select>
+      </div>
+    </div>
+    <div class="settings-group-label" style="margin-top:24px;">Web Settings</div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">Tab name</div><div class="settings-row-desc">Set the title of this tab</div></div>
+      <div class="settings-row-control"><input class="ctrl-input" type="text" value="Galactic Launcher"></div>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">Tab icon</div><div class="settings-row-desc">Input a url to an image for the tab icon</div></div>
+      <div class="settings-row-control"><input class="ctrl-input" type="text" value="/assets/icon.webp"></div>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">about:blank</div><div class="settings-row-desc">Open this tab in a blank tab</div></div>
+      <div class="settings-row-control"><button class="ctrl-btn-cyan">Open</button></div>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">Auto about:blank</div><div class="settings-row-desc">Instantly opens about:blank if you don't want to leave this page in your history. Doesn't work in firefox</div></div>
+      <div class="settings-row-control"><button class="ctrl-btn-dark">Disabled</button></div>
+    </div>
+  </div>
+</div>
 
+<!-- DOWNLOADS -->
+<div class="page" id="page-downloads">
+  <div class="downloads-page">
+    <div class="downloads-title">GALACTIC DOWNLOADS</div>
+    <div class="downloads-list" id="downloadsList"></div>
+  </div>
+</div>
+
+<footer style="padding:12px 40px;display:flex;justify-content:space-between;font-size:12px;color:#444;background:#111;border-top:1px solid #1a1a1a;">
+  <span>© 2025 Galactic · v1.0.0</span>
+  <span>Not affiliated with Mojang AB</span>
+</footer>
+
+<script>
+// ============================================================
+//  ✏️  EASY CUSTOMIZATION SECTION — EDIT EVERYTHING HERE
+// ============================================================
+
+// --- LAUNCH BUTTON ---
+// Set CLIENT_FILE to the path of your client HTML file, relative to this launcher.
+// Example: if your client is in a folder called "client" next to this file, use "client/index.html"
+// Example: if it's in the same folder, use "eaglercraft.html"
+const CLIENT_FILE = "const CLIENT_FILE = "client/index.html";";
+
+// Button display text
+const LAUNCH_TITLE = "LAUNCH GALACTIC";
+const LAUNCH_VERSION = "EaglercraftX 1.1,2";
+
+// --- NEWS CARDS ---
+// Add, remove, or edit news items here.
+// Each item: { title, date, author, color }
+// color options: "green" | "sunset" | "night"  (controls the thumbnail art)
+const NEWS_ITEMS = [
+  {
+    title: "more cheats blah blah blah",
+    date: "2025-01-01",
+    author: "Galactic",
+    color: "green"
+  },
+  {
+    title: "cheats blah blah",
+    date: "2025-01-01",
+    author: "Galactic",
+    color: "sunset"
+  },
+  {
+    title: "News ",
+    date: "2025-01-01",
+    author: "Galactic",
+    color: "night"
+  }
+];
+
+// --- DOWNLOADS ---
+// Each item: { name, desc, url }
+// url should be a direct GitHub release download link or any URL.
+// Example GitHub release link: "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0/client.zip"
+// Example GitHub repo page:    "https://github.com/YOUR_USERNAME/YOUR_REPO"
+const DOWNLOAD_ITEMS = [
+  {
+    name: "Galactic 1.1.2",
+    desc: "Latest Version of The Download ",
+    url: "https://github.com/GalacticClient/Galactic-Client"
+  },
+
+  {
+
+  }
+];
+
+// ============================================================
+//  END OF CUSTOMIZATION SECTION — don't edit below unless
+//  you know what you're doing
+// ============================================================
+
+// Set launch button text
+document.getElementById('launchText').textContent = LAUNCH_TITLE;
+document.getElementById('launchSub').textContent = LAUNCH_VERSION;
+
+// Launch client from local file
+function launchClient() {
+  const btn = document.getElementById('launchBtn');
+  const txt = document.getElementById('launchText');
+  txt.textContent = 'LAUNCHING...';
+  btn.style.pointerEvents = 'none';
+  setTimeout(() => {
+    window.location.href = CLIENT_FILE;
+  }, 600);
+}
+
+// Build news grid
+function buildNews() {
+  const grid = document.getElementById('newsGrid');
+  grid.innerHTML = '';
+  NEWS_ITEMS.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'news-card';
+    const cid = 'nc_' + i;
+    card.innerHTML = `
+      <canvas class="news-card-thumb" id="${cid}" width="400" height="180"></canvas>
+      <div class="news-card-body">
+        <div class="news-card-title">${item.title}</div>
+        <div class="news-card-meta"><span>Posted by ${item.author}</span><span>${item.date}</span></div>
+      </div>`;
+    grid.appendChild(card);
+    setTimeout(() => drawNewsCard(cid, item.color), 0);
+  });
+}
+
+// Build downloads list
+function buildDownloads() {
+  const list = document.getElementById('downloadsList');
+  list.innerHTML = '';
+  DOWNLOAD_ITEMS.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'dl-row';
+    row.innerHTML = `
+      <div>
+        <div class="dl-name">${item.name}</div>
+        <div class="dl-desc">${item.desc}</div>
+      </div>
+      <button class="dl-btn" onclick="window.open('${item.url}','_blank')">Download</button>`;
+    list.appendChild(row);
+  });
+}
+
+// Page switcher
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- Canvas drawing ----
+function drawHero() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || 1200;
+  canvas.height = canvas.offsetHeight || 360;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const sky = ctx.createLinearGradient(0, 0, W, H);
+  sky.addColorStop(0,'#7ecfea'); sky.addColorStop(0.25,'#aadde8');
+  sky.addColorStop(0.5,'#cdeae8'); sky.addColorStop(0.7,'#e8ead8');
+  sky.addColorStop(0.85,'#f0d8b8'); sky.addColorStop(1,'#f0c080');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='rgba(255,255,255,0.45)';
+  [[W*.12,H*.15,55],[W*.28,H*.08,40],[W*.72,H*.12,50],[W*.88,H*.18,38],[W*.5,H*.06,35]].forEach(([x,y,r])=>{
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(x+r*.7,y+r*.1,r*.7,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(x-r*.6,y+r*.15,r*.65,0,Math.PI*2);ctx.fill();
+  });
+  function mts(pts,col){ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);pts.forEach(([x,y])=>ctx.lineTo(x*W,y*H));ctx.lineTo(W,H);ctx.closePath();ctx.fill();}
+  mts([[0,.72],[.05,.45],[.12,.62],[.18,.38],[.26,.58],[.33,.3],[.4,.52],[.48,.25],[.55,.48],[.63,.32],[.7,.55],[.78,.28],[.85,.5],[.92,.38],[1,.58]],'rgba(160,210,220,0.55)');
+  mts([[0,.78],[.04,.52],[.1,.65],[.17,.42],[.24,.62],[.3,.36],[.38,.55],[.44,.3],[.52,.52],[.6,.38],[.67,.58],[.74,.32],[.82,.54],[.9,.4],[1,.62]],'rgba(130,185,205,0.6)');
+  mts([[0,.85],[.03,.58],[.09,.72],[.15,.5],[.22,.68],[.28,.44],[.36,.62],[.43,.38],[.5,.6],[.57,.42],[.64,.62],[.71,.38],[.79,.58],[.87,.44],[.94,.64],[1,.7]],'rgba(100,160,185,0.7)');
+  mts([[0,1],[0,.72],[.06,.62],[.13,.78],[.2,.55],[.28,.72],[.36,.5],[.44,.68],[.52,.46],[.6,.65],[.68,.48],[.76,.68],[.84,.52],[.92,.7],[1,.6],[1,1]],'rgba(70,130,155,0.85)');
+  const fg=ctx.createLinearGradient(0,H*.82,0,H);
+  fg.addColorStop(0,'rgba(50,100,130,0.9)');fg.addColorStop(1,'rgba(30,70,100,1)');
+  ctx.fillStyle=fg; ctx.fillRect(0,H*.82,W,H*.18);
+}
+
+function drawNewsCard(id, theme) {
+  const c = document.getElementById(id);
+  if (!c) return;
+  c.width = 400; c.height = 180;
+  const ctx = c.getContext('2d');
+  if (theme === 'green') {
+    const sky=ctx.createLinearGradient(0,0,0,180);sky.addColorStop(0,'#4a90d9');sky.addColorStop(1,'#7ab8f0');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,400,180);
+    ctx.fillStyle='#ffe066';ctx.beginPath();ctx.arc(340,40,22,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    [[60,30,20],[120,22,15],[220,35,18],[300,28,14]].forEach(([x,y,r])=>{ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(x+r*.8,y+3,r*.7,0,Math.PI*2);ctx.fill();});
+    ctx.fillStyle='#3a7d30';ctx.beginPath();ctx.ellipse(80,160,100,60,0,Math.PI,0);ctx.fill();
+    ctx.beginPath();ctx.ellipse(320,165,110,55,0,Math.PI,0);ctx.fill();
+    ctx.fillStyle='#2d6e24';ctx.fillRect(0,140,400,40);
+    ctx.fillStyle='#5a9e40';ctx.fillRect(0,138,400,8);
+    function tree(x){ctx.fillStyle='#5a3a1a';ctx.fillRect(x-4,115,8,30);ctx.fillStyle='#2d8a20';ctx.fillRect(x-14,90,28,30);ctx.fillStyle='#35a025';ctx.fillRect(x-10,82,20,16);}
+    [50,110,170,230,290,350].forEach(tree);
+  } else if (theme === 'sunset') {
+    const sky=ctx.createLinearGradient(0,0,0,180);sky.addColorStop(0,'#0a0520');sky.addColorStop(0.4,'#1a1040');sky.addColorStop(0.7,'#6a2010');sky.addColorStop(1,'#c05020');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,400,180);
+    ctx.fillStyle='rgba(255,255,200,0.8)';
+    [[30,20],[80,10],[140,25],[200,8],[260,18],[320,12],[370,25]].forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();});
+    const glow=ctx.createRadialGradient(200,130,0,200,130,80);glow.addColorStop(0,'rgba(255,160,30,0.9)');glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=glow;ctx.fillRect(0,60,400,120);
+    ctx.fillStyle='#ff9020';ctx.beginPath();ctx.arc(200,135,18,Math.PI,0);ctx.fill();
+    ctx.fillStyle='#0d0820';ctx.beginPath();ctx.moveTo(0,180);
+    [[0,140],[40,100],[80,130],[120,80],[160,110],[200,60],[240,100],[280,75],[320,105],[360,85],[400,120],[400,180]].forEach(([x,y])=>ctx.lineTo(x,y));
+    ctx.closePath();ctx.fill();
+    ctx.fillStyle='#080510';ctx.fillRect(0,155,400,25);
+  } else {
+    const sky=ctx.createLinearGradient(0,0,0,180);sky.addColorStop(0,'#050d20');sky.addColorStop(0.5,'#0a1a35');sky.addColorStop(1,'#152a4a');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,400,180);
+    const mg=ctx.createRadialGradient(320,45,0,320,45,50);mg.addColorStop(0,'rgba(220,230,255,0.25)');mg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=mg;ctx.fillRect(260,0,120,100);
+    ctx.fillStyle='#dde8ff';ctx.beginPath();ctx.arc(320,45,20,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#c8d8f0';ctx.beginPath();ctx.arc(313,40,18,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(200,220,255,0.7)';
+    [[20,15],[60,8],[100,20],[160,10],[230,18],[280,8],[370,20]].forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();});
+    ctx.fillStyle='#1a304a';ctx.beginPath();ctx.moveTo(0,180);
+    [[0,130],[50,85],[100,120],[150,70],[200,105],[250,65],[300,90],[350,70],[400,100],[400,180]].forEach(([x,y])=>ctx.lineTo(x,y));
+    ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(220,235,255,0.7)';
+    [[50,85,20],[150,70,22],[250,65,24],[350,70,20]].forEach(([x,y,s])=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-s,y+s*.8);ctx.lineTo(x+s,y+s*.8);ctx.closePath();ctx.fill();});
+    ctx.fillStyle='#0d1e30';ctx.fillRect(0,155,400,25);
+  }
+}
+
+window.addEventListener('load', () => {
+  drawHero();
+  buildNews();
+  buildDownloads();
+  window.addEventListener('resize', drawHero);
+});
+</script>
 </body>
 </html>
