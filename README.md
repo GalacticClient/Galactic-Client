@@ -2,7 +2,7 @@
 
 Welcome to **Galactic Client**, a feature-rich client packed with over **245+ modules** designed to elevate your gameplay experience. 
 
-[![Discord Shield](https://img.shields.io/discord/1000000000000000000?style=for-the-badge&logo=discord&logoColor=white&color=7289da)](https://discord.gg/3z2Fv5Efa4)
+[![Discord Shield](https://img.shields.io/discord/1455961768332628244?style=for-the-badge&logo=discord&logoColor=white&color=7289da)](https://discord.gg/3z2Fv5Efa4)
 
 ---
 
