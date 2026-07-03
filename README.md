@@ -1,4 +1,4 @@
-# 🌌 Galactic Client
+# Galactic Client
 
 Welcome to **Galactic Client**, a feature-rich client packed with over **245+ modules** designed to elevate your gameplay experience. 
 
