@@ -42,3 +42,6 @@ The heart of Galactic Client is our community. By joining our official Discord s
 Ready to dive in? Click the button below to join our community hub!
 
 [![Join Discord](https://img.shields.io/badge/Join%20Our%20Community-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/3z2Fv5Efa4)
+
+
+if you enjoy using the client feel free to star and fork this repo
