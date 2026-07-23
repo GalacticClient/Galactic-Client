@@ -1,6 +1,6 @@
 # Galactic Client
 
-Welcome to **Galactic Client**, a feature-rich Eaglercraft Hack Client, its 1.12.2, packed with over **250+ modules** designed to elevate your gameplay experience.
+Welcome to **Galactic Client**, a feature-rich Eaglercraft Hack Client for 1.12.2, packed with over **250+ modules** designed to elevate your gameplay experience.
 
 [![Version](https://img.shields.io/badge/version-v6.8.0-blue?style=for-the-badge)](https://discord.gg/3z2Fv5Efa4)
 [![Discord Online](https://img.shields.io/discord/1455961768332628244?style=for-the-badge&logo=discord&logoColor=white&color=7289da&label=online)](https://discord.gg/3z2Fv5Efa4)
