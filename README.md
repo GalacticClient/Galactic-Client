@@ -45,6 +45,8 @@ Ready to dive in? Click the button below to join our community hub!
 
 
 if you enjoy using the client feel free to star and fork this repo
+
+
 defualt but you can config the color with ColorUI<img width="1361" height="765" alt="image" src="https://github.com/user-attachments/assets/f830906f-f8c0-418f-b151-6257ec165b73" />
 
 <img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/24fef182-33dd-43f0-ab07-ae463c75d9d2" />
