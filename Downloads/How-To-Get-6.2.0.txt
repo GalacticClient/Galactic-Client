@@ -1,1 +1,14 @@
 https://gitflic.ru/project/galacticclient/galactic-client/blob/raw?file=Galactic-Client-6.2.0.html&inline=false&commit=7b83eb86b52f05562d871c0cb30f241277de7d64
+
+
+Changelog:
+
+Added PlayerInfoEsp
+Added AutoMLG
+Added Reset all Button in gui
+Added button in gui to switch GUI opens/close key
+Added hostile/passive to triggerbot
+Added AutoElytraFly
+Added ActiveModuleHud
+Made it so keybinds dont trigger while your typing in chat
+Update Nameprotect to cover more stuff
