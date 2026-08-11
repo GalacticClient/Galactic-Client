@@ -1,1 +1,14 @@
 https://gitflic.ru/project/galacticclient/galactic-client/blob/raw?file=Galactic-Client-6.6.0.html&inline=false&commit=7b83eb86b52f05562d871c0cb30f241277de7d64
+
+
+Changelog: 
+
+Added keystrokes
+Added itemcounthud
+Added Non-hack category
+Fixed freecam
+Improved combat bypasses
+Added CobwebBreaker
+Added AutoXp
+Added info panel in main gui
+Added new background for main menu
