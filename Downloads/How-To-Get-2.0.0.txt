@@ -1,4 +1,4 @@
-https://gitflic.ru/project/galacticclient/galactic-client/blob/raw?file=Galactic-Client-2.0.0.html&inline=false&commit=7b83eb86b52f05562d871c0cb30f241277de7d64
+https://gitflic.ru/project/galacticclient/galactic-client/release/9247e9a2-467c-4139-9361-796bd1fcdebe/fdda0b4e-6437-4465-ab3d-26fd7eb031a7/download
 
 ChangeLog: 
 
