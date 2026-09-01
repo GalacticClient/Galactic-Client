@@ -1,4 +1,6 @@
 https://www.mediafire.com/file/lxnp07x03rllnzn/Galactic-Client-7.0.0.html/file
+or
+https://gitflic.ru/project/galacticclient/galactic-client/release/09036280-b5a3-4858-a77e-1c79f4c85cb0/4f207154-711a-4ab9-ae29-908a3c519214/download
 
 Changelog: 
 
